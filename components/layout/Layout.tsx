@@ -1,10 +1,11 @@
 import {Fragment} from 'react';
-import {Header} from './header';
-export const Layout = (props) => {
+import {Header} from './Header';
+import {childrenInterface} from '@/interface/children';
+export const Layout = (props: childrenInterface) => {
   return (
     <Fragment>
       <header>
-        <Header/>
+        <Header />
       </header>
       <main>{props.children}</main>
     </Fragment>
