@@ -1,15 +1,34 @@
 import {EventList} from '@/components/events/event-list';
-import {getFeaturedEvents, getFilteredEvents} from '@/features/eventFeat';
+
 import fs from 'fs/promises';
 import path from 'path';
 import {useRouter} from 'next/router';
-import { GetStaticPaths } from 'next';
-import { mockDataInterface } from '@/interface/mock-dataInterface';
+import {GetServerSideProps, GetStaticPaths} from 'next';
+import {mockDataInterface} from '@/interface/mock-dataInterface';
+import {getAllEvents, getFilteredEvents} from '@/helpers/api-util';
+import Head from 'next/head';
 
 const FilteredEventsPage = (props: any) => {
-  const router = useRouter();
-  const filterData = router.query.slug;
-  const events = props.events;
+  if (props.filteredEvents.length === 0) {
+    return <p>not Found</p>;
+  }
+  return (
+    <div>
+      <Head>
+        <title>event Date</title>
+        <meta
+          name='description'
+          content='Check events around your neighborhood'
+        />
+      </Head>
+      <EventList items={props.filteredEvents} />
+    </div>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const {params} = context;
+  const filterData = params?.slug;
   if (!filterData) {
     return <p>Loading</p>;
   } else if (filterData.length >= 3) {
@@ -27,46 +46,17 @@ const FilteredEventsPage = (props: any) => {
     numMonth < 1 ||
     numMonth > 12
   ) {
-    return <p>Invalid filter, please enter correct values</p>;
+    return {
+      props: {hasError: true},
+    };
   }
-  const filteredEvents = getFilteredEvents(
-    {
-      year: numYear,
-      month: numMonth,
-    },
-    events
-  );
-  if (!filteredEvents || filteredEvents.length === 0) {
-    return <p>No events found</p>;
-  }
-  return (
-    <div>
-      <EventList items={filteredEvents} />
-    </div>
-  );
-};
-export async function getStaticProps(context: any) {
-  const filePath = path.join(process.cwd(), 'data', 'mock-data.json');
-  const jsonData = await fs.readFile(filePath);
-  const data = JSON.parse(jsonData.toString());
+  const filteredEvents = await getFilteredEvents({
+    year: numYear,
+    month: numMonth,
+  });
+
   return {
-    props: {
-      events: getFeaturedEvents(data),
-    },
-    revalidate: 20,
-  };
-}
-export const getStaticPaths: GetStaticPaths = async () => {
-  const filePath = path.join(process.cwd(), 'data', 'mock-data.json');
-  const jsonData = await fs.readFile(filePath);
-  const data = JSON.parse(jsonData.toString());
-  const eventIds = data.map((eventObject: mockDataInterface) => eventObject.id);
-  const params = eventIds.map((id: string | number) => ({
-    params: {eventId: id},
-  }));
-  return {
-    paths: params,
-    fallback: 'blocking',
+    props: {filteredEvents},
   };
 };
 export default FilteredEventsPage;

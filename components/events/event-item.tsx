@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './event-item.module.css';
 import {Button} from '../UI/button';
+import Image from 'next/image';
 export const EventItem = (props: any) => {
   const {title, image, date, location, id} = props;
 
@@ -13,10 +14,9 @@ export const EventItem = (props: any) => {
   const exploreLink = `/events/${id}`;
   return (
     <li className={styles.item}>
-      <img
-        src={'/' + image}
-        alt={title}
-      />
+      <Image width={250} height={160}  src={'/' + image}
+        alt={title}/>
+
       <div className={styles.content}>
         <div className={styles.summary}>
           <div>

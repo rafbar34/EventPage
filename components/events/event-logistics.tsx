@@ -1,6 +1,7 @@
 import LogisticsItem from './logistics-item';
 import classes from './event-logistics.module.css';
 import {mockDataInterface} from '@/interface/mock-dataInterface';
+import Image from 'next/image';
 
 const EventLogistics = (props: mockDataInterface) => {
   const {date = new Date(), address, image, imageAlt} = props;
@@ -15,8 +16,10 @@ const EventLogistics = (props: mockDataInterface) => {
   return (
     <section className={classes.logistics}>
       <div className={classes.image}>
-        <img
+        <Image
           src={`/${image}`}
+          width={300}
+          height={300}
           alt={imageAlt}
         />
       </div>

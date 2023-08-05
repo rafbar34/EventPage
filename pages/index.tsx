@@ -1,24 +1,24 @@
-import fs from 'fs/promises';
-import path from 'path';
-import {EventList} from '@/components/events/event-list';
-import { getFeaturedEvents} from '@/features/eventFeat';
 
+import {EventList} from '@/components/events/event-list';
+import {getFeaturedEvents} from '@/helpers/api-util';
+import Head from "next/head"
 const HomePage = (props: any) => {
   const {events} = props;
-  console.log('test');
   return (
     <div>
+      <Head>
+      <title>Events</title>
+      <meta name='description' content='Check events around your neighborhood' />
+      </Head>
       <EventList items={events} />
     </div>
   );
 };
-export async function getStaticProps(context: any) {
-  const filePath = path.join(process.cwd(), 'data', 'mock-data.json');
-  const jsonData = await fs.readFile(filePath);
-  const data = JSON.parse(jsonData.toString());
+export async function getStaticProps() {
+  const featuredEvents = await getFeaturedEvents();
   return {
     props: {
-      events: getFeaturedEvents(data),
+      events: featuredEvents,
     },
     revalidate: 20,
   };
