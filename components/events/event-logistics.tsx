@@ -20,7 +20,7 @@ const EventLogistics = (props: mockDataInterface) => {
           src={`/${image}`}
           width={300}
           height={300}
-          alt={imageAlt}
+          alt={String(imageAlt)}
         />
       </div>
       <ul className={classes.list}>

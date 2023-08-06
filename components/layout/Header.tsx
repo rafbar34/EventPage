@@ -8,6 +8,9 @@ export const Header = () => {
       </div>
       <nav className={style.navigation}>
         <li>
+          <Link href={'/events/addEvents'}>Add events</Link>
+        </li>
+        <li>
           <Link href={'/events'}>All events</Link>
         </li>
       </nav>

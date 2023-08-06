@@ -1,0 +1,10 @@
+.container{
+    background-color: white;
+    margin: 5px 0px 5px 0px;
+    border: 2px solid black;
+    
+}
+.input{
+height: 30px;
+width: 80%;
+}

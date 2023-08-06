@@ -1,0 +1,16 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+.form {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    justify-content: space-evenly;
+  height: 300px;
+  width: 500px;
+  background-color: red;
+}

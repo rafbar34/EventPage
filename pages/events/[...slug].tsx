@@ -9,9 +9,9 @@ import {getAllEvents, getFilteredEvents} from '@/helpers/api-util';
 import Head from 'next/head';
 
 const FilteredEventsPage = (props: any) => {
-  if (props.filteredEvents.length === 0) {
-    return <p>not Found</p>;
-  }
+  // if (props.filteredEvents.length === 0) {
+  //   return <p>not Found</p>;
+  // }
   return (
     <div>
       <Head>
