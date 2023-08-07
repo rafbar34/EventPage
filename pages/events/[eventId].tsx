@@ -13,6 +13,8 @@ import {
   getFeaturedEvents,
 } from '@/helpers/api-util';
 import Head from 'next/head';
+import { EventAddCommentSection } from '@/components/events/event-add-comment-section';
+import { EventShowCommentSection } from '@/components/events/event-show-comments';
 const EventDetailPage = (props: any) => {
   if (!props.events) {
     return <p>No event found</p>;
@@ -36,6 +38,8 @@ const EventDetailPage = (props: any) => {
       <EventContent>
         <p>{props.events.description}</p>
       </EventContent>
+      <EventAddCommentSection/>
+      <EventShowCommentSection/>
     </Fragment>
   );
 };

@@ -1,0 +1,15 @@
+.card {
+  border: 2px solid black;
+  min-height: 5rem;
+  padding: 10px 0px;
+  border-radius: 16px;
+}
+.top {
+  margin-top: 10px;
+  width: 75%;
+  display: flex;
+  justify-content: space-around;
+}
+.textArea {
+  padding: 15px 30px;
+}

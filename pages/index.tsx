@@ -1,5 +1,6 @@
 
 import {EventList} from '@/components/events/event-list';
+import { EventNewsletter } from '@/components/events/event-newsletter';
 import {getFeaturedEvents} from '@/helpers/api-util';
 import Head from "next/head"
 const HomePage = (props: any) => {
@@ -10,6 +11,7 @@ const HomePage = (props: any) => {
       <title>Events</title>
       <meta name='description' content='Check events around your neighborhood' />
       </Head>
+      <EventNewsletter/>
       <EventList items={events} />
     </div>
   );

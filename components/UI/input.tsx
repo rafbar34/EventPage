@@ -4,11 +4,20 @@ type inputType = {
   placeholder: string;
   name: string;
   setState: any;
+  style?: Object | undefined;
 };
 
-export const Input = ({type, placeholder, name, setState}: inputType) => {
+export const Input = ({
+  style,
+  type,
+  placeholder,
+  name,
+  setState,
+}: inputType) => {
   return (
-    <div className={styles.box}>
+    <div
+      style={style}
+      className={styles.box}>
       <label htmlFor={name}>
         <input
           onChange={(e) => {
