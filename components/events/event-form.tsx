@@ -15,7 +15,6 @@ export const EventForm = () => {
       date: date,
       description: desc,
     };
-    console.log( JSON.stringify(formData),"tedsssss")
     const response = await fetch('/api/feedback', {
       method: 'POST',
       body: JSON.stringify(formData),
