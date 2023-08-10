@@ -1,55 +1,59 @@
-const handler = (
-    req: any,
-    res: {status: (arg0: number) => {(): any; new (): any; json: any}}
-  ) => {
-      //db
-      const dbData = [
-          {
-              nickname: 'test',
-        content: 'tesssst',
-        email: 'tessst@',
-        eventId: 'e2',
-    },
-    {
-        nickname: 'test',
-        content: 'tesssst',
-        email: 'tessst@',
-        eventId: 'e2',
-    },
-    {
-        nickname: 'test',
-        content: 'tesssst',
-        email: 'tessst@',
-        eventId: 'e2',
-    },
-    {
-        nickname: 'test',
-        content: 'tesssst',
-        email: 'tessst@',
-        eventId: 'e2',
-    },
-];
-if(req.method==="GET"){
+import {getFindDocument, insertDocument} from '@/helpers/db-util';
+import {MongoClient} from 'mongodb';
+const handler = async (
+  req: any,
+  res: {status: (arg0: number) => {(): any; new (): any; json: any}}
+) => {
+  const url = `mongodb+srv://${process.env.EMAIL}:${process.env.PASSWORD}@cluster0.pdjzyjw.mongodb.net/`;
+  const client = await MongoClient.connect(url);
+  const db = client.db('coments');
+  if (req.method === 'GET') {
     const eventId = req.query.eventId;
+    try{
     
-    const getCommentsForEvent = dbData.filter((comments) => {
-        
-        return  comments.eventId === eventId;
-        });
-        return res.status(200).json(getCommentsForEvent);
+        const getCommentsForEvent = await getFindDocument(
+          db,
+          'comentsData',
+          "eventId",
+          eventId
+        );
+
+    return res.status(200).json(getCommentsForEvent);
+}catch(err){
+    console.log(err)
+    return res.status(500).json({error:'failed'});
+
+}
+
+  }
+  if (req.method === 'POST') {
+    const email = req.body.email;
+    const userName = req.body.userName;
+    const content = req.body.content;
+    const eventId = req.body.eventId;
+    const commentId = req.body.commentId;
+    const documentObject = {
+      email,
+      userName,
+      content,
+      eventId,
+      commentId,
+    };
+    let response;
+    try {
+      response = await insertDocument(documentObject, client,"comentsData");
+      return res.status(201).json({
+        message: 'success',
+      });
+    } catch (err) {
+      console.log(err);
+      response = err;
+      return res.status(201).json({
+        message: 'failed',
+        error: response,
+      });
+      
     }
-    if(req.method === "POST"){
-        console.log(req.body)
-        const email = req.body.email
-        const userName = req.body.userName
-        const content = req.body.content
-        const eventId = req.body.eventId
-        const commentId = req.body.commentId
-        console.log(email,userName,content,eventId,commentId)
-        return res.status(201).json({
-            message: 'success',
-          });
-    }
-  };
-  export default handler;
-  
+  }
+};
+export default handler;
