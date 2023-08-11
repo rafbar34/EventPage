@@ -17,7 +17,7 @@ const handler = async (req: any, res: any) => {
       return res.status(500).json({error:'Your connection is lost'})
     }
     try {
-      await insertDocument(emailObject, client,"newsletter");
+      await insertDocument(emailObject, client,"emails","newsletter");
       client.close();
     } catch (err) {
       console.log(err);

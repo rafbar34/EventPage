@@ -13,7 +13,7 @@ const handler = async (
     
         const getCommentsForEvent = await getFindDocument(
           db,
-          'comentsData',
+          'commentsData',
           "eventId",
           eventId
         );
@@ -41,7 +41,7 @@ const handler = async (
     };
     let response;
     try {
-      response = await insertDocument(documentObject, client,"comentsData");
+      response = await insertDocument(documentObject, client,"commentsData","coments");
       return res.status(201).json({
         message: 'success',
       });

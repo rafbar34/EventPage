@@ -1,37 +1,61 @@
 import {Input} from '../UI/input';
-import {useState} from 'react'
-import { TextArea } from '../UI/textArea';
+import {useContext, useState} from 'react';
+import {TextArea} from '../UI/textArea';
 import style from './event-add-comment-section.module.css';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
+import {NotificationsContext} from '@/store/notifications-context';
 export const EventAddCommentSection = () => {
-  const router = useRouter()
-  const eventId = router.query.eventId
+  const router = useRouter();
+  const eventId = router.query.eventId;
   const inputCustom = {width: '45%'};
-  const [email,setEmail] = useState('')
-  const [userName, setUserName] = useState('')
-  const [context,setContext] = useState('')
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [content, setContent] = useState('');
 
-  const submitCommentsHandler = async(e:any) =>{
-    e.preventDefault()
+  const notificationCtx = useContext(NotificationsContext);
 
-    const response = await fetch(`/api/comments/${eventId}`,{
+
+  const submitCommentsHandler = (e: any) => {
+    e.preventDefault();
+    notificationCtx.showNotification({
+      title: 'added coments...',
+      text: 'Registring for newsLetter',
+      status: 'pending',
+    });
+    fetch(`/api/comments/${eventId}`, {
       method: 'POST',
       body: JSON.stringify({
-        email:email,
-        userName:userName,
-        content:context,
-        commentId:(Math.random()*100000).toFixed(),
-        eventId:eventId
+        email: email,
+        userName: userName,
+        content: content,
+        commentId: (Math.random() * 100000).toFixed(),
+        eventId: eventId,
       }),
-      headers:{
-        "Content-Type":'application/json'
-      }
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-  }
+      .then((res) => {
+        notificationCtx.showNotification({
+          title: 'Success...',
+          text: 'Added new comment',
+          status: 'success',
+        });
+      })
+      .catch((err) => {
+        notificationCtx.showNotification({
+          title: 'error',
+          text: err.message,
+          status: 'error',
+        });
+      });
+  };
   return (
     <div>
       <div className={style.box}>
-        <form onSubmit={submitCommentsHandler} className={style.form}>
+        <form
+          onSubmit={submitCommentsHandler}
+          className={style.form}>
           <div className={style.inputs}>
             <Input
               style={inputCustom}
@@ -41,17 +65,26 @@ export const EventAddCommentSection = () => {
               setState={setEmail}
             />
             <Input
-            name='userName'
-            placeholder='nickname'
+              name='userName'
+              placeholder='nickname'
               style={inputCustom}
               type='text'
               setState={setUserName}
             />
           </div>
           <div className={style.textArea}>
-            <TextArea setState={setContext} name='context' key={'context'} placeholder='Enter comment ...'/>
+            <TextArea
+              setState={setContent}
+              name='content'
+              key={'content'}
+              placeholder='Enter comment ...'
+            />
           </div>
-          <button type='submit' className={style.button}>Submit</button>
+          <button
+            type='submit'
+            className={style.button}>
+            Submit
+          </button>
         </form>
       </div>
     </div>

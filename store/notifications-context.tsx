@@ -17,7 +17,7 @@ function NotificationContextProvider(props) {
   useEffect(() => {
     if (
       activeNotification &&
-      (activeNotification.status === 'send' ||
+      (activeNotification.status === 'success' ||
         activeNotification.status === 'error')
     ) {
       const timer = setTimeout(() => {

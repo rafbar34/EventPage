@@ -4,9 +4,9 @@ export const connectDatabase = async (url: string) => {
   const client = await MongoClient.connect(url);
   return client;
 };
-export const insertDocument = async (document, client,collection) => {
+export const insertDocument = async (document, client,collection, category) => {
 
-  const response = await client.db(collection).collection('emails').insertOne(document);
+  const response = await client.db(category).collection(collection).insertOne(document);
   console.log(response)
   return response;
 };

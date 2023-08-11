@@ -32,7 +32,7 @@ export const EventNewsletter = () => {
         notificationCtx.showNotification({
           title: 'Success',
           text: 'Success sign newsLetter',
-          status: 'send',
+          status: 'success',
         });
       })
       .catch((err) => {

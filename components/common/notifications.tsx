@@ -1,7 +1,7 @@
 import styles from './notifications.module.css';
 export const Notifications = ({text, status, title}) => {
   let background;
-  if (status === 'send') {
+  if (status === 'success') {
     background = 'green';
   }
   if (status === 'pending') {
