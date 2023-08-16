@@ -2,8 +2,8 @@ import {Button} from '../UI/button';
 import {useRef} from 'react';
 import style from './event-search.module.css';
 export const EventSearch = (props: any) => {
-  const yearInputRef = useRef('2021')as any;
-  const monthInputRef = useRef('1') as any ;
+  const yearInputRef = useRef('2021') as any;
+  const monthInputRef = useRef('1') as any;
   const submitHandler = (event: any) => {
     event.preventDefault();
     const selectedYear = yearInputRef.current.value;

@@ -14,8 +14,12 @@ export const EventItem = (props: any) => {
   const exploreLink = `/events/${id}`;
   return (
     <li className={styles.item}>
-      <Image width={250} height={160}  src={'/' + image}
-        alt={title}/>
+      <Image
+        width={250}
+        height={160}
+        src={'/' + image}
+        alt={title}
+      />
 
       <div className={styles.content}>
         <div className={styles.summary}>

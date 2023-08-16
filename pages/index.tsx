@@ -1,17 +1,19 @@
-
 import {EventList} from '@/components/events/event-list';
-import { EventNewsletter } from '@/components/events/event-newsletter';
+import {EventNewsletter} from '@/components/events/event-newsletter';
 import {getFeaturedEvents} from '@/helpers/api-util';
-import Head from "next/head"
+import Head from 'next/head';
 const HomePage = (props: any) => {
   const {events} = props;
   return (
     <div>
       <Head>
-      <title>Events</title>
-      <meta name='description' content='Check events around your neighborhood' />
+        <title>Events</title>
+        <meta
+          name='description'
+          content='Check events around your neighborhood'
+        />
       </Head>
-      <EventNewsletter/>
+      <EventNewsletter />
       <EventList items={events} />
     </div>
   );

@@ -15,13 +15,12 @@ export const EventNewsletter = () => {
   }, [email]);
 
   const sendEmailHandler = () => {
-  
     notificationCtx.showNotification({
       title: 'Signing up...',
       text: 'Registring for newsLetter',
       status: 'pending',
     });
-     fetch('/api/newsletter', {
+    fetch('/api/newsletter', {
       method: 'POST',
       body: JSON.stringify({email: email}),
       headers: {

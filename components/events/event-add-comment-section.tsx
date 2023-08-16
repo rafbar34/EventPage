@@ -14,7 +14,6 @@ export const EventAddCommentSection = () => {
 
   const notificationCtx = useContext(NotificationsContext);
 
-
   const submitCommentsHandler = (e: any) => {
     e.preventDefault();
     notificationCtx.showNotification({
@@ -83,7 +82,7 @@ export const EventAddCommentSection = () => {
           <button
             type='submit'
             className={style.button}>
-            Submit
+            Add post
           </button>
         </form>
       </div>

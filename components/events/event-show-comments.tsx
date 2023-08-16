@@ -10,7 +10,6 @@ export const EventShowCommentSection = () => {
     const response = await fetch(`/api/comments/${eventId}`);
     const data = await response.json();
     setComments(data);
-    console.log( data);
   };
   useEffect(() => {
     getComments();

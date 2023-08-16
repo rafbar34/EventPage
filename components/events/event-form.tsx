@@ -65,7 +65,11 @@ export const EventForm = () => {
           name='eventDescription'
           placeholder='Description'
         />
-        <button className={style.button} type='submit'>Create event</button>
+        <button
+          className={style.button}
+          type='submit'>
+          Create event
+        </button>
       </form>
     </div>
   );
