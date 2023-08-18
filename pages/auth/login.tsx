@@ -1,10 +1,25 @@
 import { LoginPage } from '@/components/auth/login';
-import {EventList} from '@/components/events/event-list';
-import {EventNewsletter} from '@/components/events/event-newsletter';
-import {getFeaturedEvents} from '@/helpers/api-util';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { getSession } from "next-auth/react"
+import {useRouter} from 'next/router';
+
 const Login = (props: any) => {
-  const {events} = props;
+    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
+    useEffect(() => {
+        getSession().then((session) => {
+        if (session) {
+          router.replace('/');
+        } else {
+          setIsLoading(false);
+        }
+      });
+    }, [router]);
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+  
   return (
     <div>
       <Head>
@@ -19,9 +34,5 @@ const Login = (props: any) => {
     </div>
   );
 };
-export const getServerSideProps = async (context) => {
-  return {
-    props: {},
-  };
-};
+
 export default Login;

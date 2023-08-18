@@ -1,14 +1,29 @@
 import {useState} from 'react';
-import {Button} from '../UI/button';
+import {signIn} from 'next-auth/react';
+
 import {Input} from '../UI/input';
 import styles from './login.module.css';
+import {useRouter} from 'next/router';
 
 export const LoginPage = () => {
+    const router = useRouter()
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    const results = await signIn('credentials', {
+      redirect: false,
+      email: userName,
+      password: password,
+    });
+    console.log(results)
+    if (!results?.error) {
+      router.replace('/events');
+    }
+  };
   return (
     <div className={styles.container}>
-      <form className={styles.form_box}>
+      <form onSubmit={submitHandler} className={styles.form_box}>
         <div className={styles.form_input}>
           Login
           <div className={styles.input_width}>
