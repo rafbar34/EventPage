@@ -11,7 +11,13 @@ export const Header = () => {
           <Link href={'/events/addEvents'}>Add events</Link>
         </li>
         <li>
-          <Link href={'/events'}>All events</Link>
+          <Link href={'/auth/login'}>Login</Link>
+        </li>
+        <li>
+          <Link href={'/auth/signIn'}>Sign in</Link>
+        </li>
+        <li>
+          <Link href={'/events'}>Logout</Link>
         </li>
       </nav>
     </header>

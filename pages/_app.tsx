@@ -6,13 +6,19 @@ import NotificationContextProvider, {
 import '@/styles/globals.css';
 import type {AppProps} from 'next/app';
 import {Fragment, useContext} from 'react';
+import {SessionProvider} from 'next-auth/react';
 
-export default function App({Component, pageProps}: AppProps) {
+export default function App({
+  Component,
+  pageProps: {session, ...pageProps},
+}: AppProps) {
   return (
-    <NotificationContextProvider>
+    <SessionProvider session={session}>
+      <NotificationContextProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-        </NotificationContextProvider>
+      </NotificationContextProvider>
+    </SessionProvider>
   );
 }
