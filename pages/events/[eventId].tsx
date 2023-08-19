@@ -13,14 +13,14 @@ import {
   getFeaturedEvents,
 } from '@/helpers/api-util';
 import Head from 'next/head';
-import { EventAddCommentSection } from '@/components/events/event-add-comment-section';
-import { EventShowCommentSection } from '@/components/events/event-show-comments';
+import {EventAddCommentSection} from '@/components/events/event-add-comment-section';
+import {EventShowCommentSection} from '@/components/events/event-show-comments';
+import {checkIsLogged} from '@/helpers/auth-validation';
 const EventDetailPage = (props: any) => {
-
   if (!props.events) {
     return <p>No event found</p>;
   }
-
+  const checkSession = checkIsLogged();
   return (
     <Fragment>
       <Head>
@@ -39,8 +39,16 @@ const EventDetailPage = (props: any) => {
       <EventContent>
         <p>{props.events.description}</p>
       </EventContent>
-      <EventAddCommentSection/>
-      <EventShowCommentSection/>
+      {checkSession === true ? (
+        <EventAddCommentSection />
+      ) : (
+        <div style={{textAlign:'center', marginTop:10}}>
+
+        Please Login to can add comments
+        </div>
+      )}
+
+      <EventShowCommentSection />
     </Fragment>
   );
 };
@@ -54,7 +62,7 @@ export async function getStaticProps(context: any) {
     props: {
       events: eventData,
     },
-    revalidate: 30,
+    revalidate: 10,
   };
 }
 export const getStaticPaths: GetStaticPaths = async () => {

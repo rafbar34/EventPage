@@ -4,11 +4,17 @@ import {Input} from '../UI/input';
 import {TextArea} from '../UI/textArea';
 import style from './event-form.module.css';
 import {useState, useContext} from 'react';
+import {checkIsLogged} from '@/helpers/auth-validation';
+import {useRouter} from 'next/router';
+
 export const EventForm = () => {
+  const router = useRouter();
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date());
   const [desc, setDesc] = useState('');
   const notificationCtx = useContext(NotificationsContext);
+
+
   const submitFormHandler = async (event: any) => {
     event.preventDefault();
     const formData = {

@@ -4,18 +4,19 @@ import {TextArea} from '../UI/textArea';
 import style from './event-add-comment-section.module.css';
 import {useRouter} from 'next/router';
 import {NotificationsContext} from '@/store/notifications-context';
+import {useSession, signOut} from 'next-auth/react';
 export const EventAddCommentSection = () => {
   const router = useRouter();
   const eventId = router.query.eventId;
   const inputCustom = {width: '45%'};
-  const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
+
+  const {data: session, status} = useSession();
   const [content, setContent] = useState('');
 
   const notificationCtx = useContext(NotificationsContext);
 
   const submitCommentsHandler = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     notificationCtx.showNotification({
       title: 'added coments...',
       text: 'Registring for newsLetter',
@@ -24,8 +25,7 @@ export const EventAddCommentSection = () => {
     fetch(`/api/comments/${eventId}`, {
       method: 'POST',
       body: JSON.stringify({
-        email: email,
-        userName: userName,
+        email: session?.user?.email,
         content: content,
         commentId: (Math.random() * 100000).toFixed(),
         eventId: eventId,
@@ -55,22 +55,6 @@ export const EventAddCommentSection = () => {
         <form
           onSubmit={submitCommentsHandler}
           className={style.form}>
-          <div className={style.inputs}>
-            <Input
-              style={inputCustom}
-              type='text'
-              name='email'
-              placeholder='email'
-              setState={setEmail}
-            />
-            <Input
-              name='userName'
-              placeholder='nickname'
-              style={inputCustom}
-              type='text'
-              setState={setUserName}
-            />
-          </div>
           <div className={style.textArea}>
             <TextArea
               setState={setContent}

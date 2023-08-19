@@ -16,7 +16,6 @@ export const LoginPage = () => {
       email: userName,
       password: password,
     });
-    console.log(results)
     if (!results?.error) {
       router.replace('/events');
     }
@@ -28,8 +27,8 @@ export const LoginPage = () => {
           Login
           <div className={styles.input_width}>
             <Input
-              name='login'
-              placeholder='Enter Login'
+              name='email'
+              placeholder='Enter Email'
               setState={setUserName}
               type='text'
             />

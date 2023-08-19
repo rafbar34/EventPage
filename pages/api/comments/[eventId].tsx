@@ -28,13 +28,11 @@ const handler = async (
   }
   if (req.method === 'POST') {
     const email = req.body.email;
-    const userName = req.body.userName;
     const content = req.body.content;
     const eventId = req.body.eventId;
     const commentId = req.body.commentId;
     const documentObject = {
       email,
-      userName,
       content,
       eventId,
       commentId,
