@@ -8,17 +8,21 @@ import type {AppProps} from 'next/app';
 import {Fragment, useContext} from 'react';
 import {SessionProvider} from 'next-auth/react';
 
+import {Provider} from 'react-redux';
+import { store } from '@/store/store';
 export default function App({
   Component,
   pageProps: {session, ...pageProps},
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <NotificationContextProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </NotificationContextProvider>
+      <Provider store={store}>
+        <NotificationContextProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </NotificationContextProvider>
+      </Provider>
     </SessionProvider>
   );
 }
