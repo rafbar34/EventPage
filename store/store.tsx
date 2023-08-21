@@ -1,5 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {configureStore, createSlice} from '@reduxjs/toolkit';
 
-export const store = configureStore({
-  reducer: {},
-})
+const initialState = {};
+
+const eventsSlice = createSlice({
+  name: 'events',
+  initialState,
+  reducers: {},
+});
+
+const store = configureStore({reducer: eventsSlice.reducer});
