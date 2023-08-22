@@ -1,4 +1,4 @@
-Purpose this project is to pratice next.js and increase own skills like Front end developer
+Simple project, created to pratice next.js and redux to increase own skills like Fornt end developer
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
