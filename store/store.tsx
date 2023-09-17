@@ -8,4 +8,4 @@ const eventsSlice = createSlice({
   reducers: {},
 });
 
-const store = configureStore({reducer: eventsSlice.reducer});
+export const store = configureStore({reducer: eventsSlice.reducer});

@@ -1,4 +1,6 @@
+import React from 'react';
 import styles from './input.module.css';
+
 type inputType = {
   type: string;
   placeholder: string;
