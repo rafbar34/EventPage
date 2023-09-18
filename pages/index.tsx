@@ -2,6 +2,7 @@ import {EventList} from '@/components/events/event-list';
 import {EventNewsletter} from '@/components/events/event-newsletter';
 import {getFeaturedEvents} from '@/helpers/api-util';
 import Head from 'next/head';
+import React from 'react';
 const HomePage = (props: any) => {
   const {events} = props;
   return (

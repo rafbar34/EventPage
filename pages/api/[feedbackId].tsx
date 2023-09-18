@@ -5,7 +5,7 @@ const handler = (
   const feedbackId = req.query.feedbackId;
 
   //db
-  const dbData = [];
+  const dbData: any[] = [];
   const getSelectedEvent = dbData.find((events) => {
     return events.id === feedbackId;
   });

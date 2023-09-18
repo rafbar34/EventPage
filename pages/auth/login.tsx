@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { getSession } from "next-auth/react"
 import {useRouter} from 'next/router';
+import React from 'react';
 
 const Login = (props: any) => {
     const [isLoading, setIsLoading] = useState(true);

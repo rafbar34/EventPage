@@ -1,6 +1,8 @@
 import { SignInPage } from '@/components/auth/signIn';
 import {getFeaturedEvents} from '@/helpers/api-util';
 import Head from 'next/head';
+import React from 'react';
+
 const SignIn = (props: any) => {
   const {events} = props;
   return (

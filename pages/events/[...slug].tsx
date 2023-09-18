@@ -7,6 +7,7 @@ import {GetServerSideProps, GetStaticPaths} from 'next';
 import {mockDataInterface} from '@/interface/mock-dataInterface';
 import {getAllEvents, getFilteredEvents} from '@/helpers/api-util';
 import Head from 'next/head';
+import React from 'react';
 
 const FilteredEventsPage = (props: any) => {
   // if (props.filteredEvents.length === 0) {

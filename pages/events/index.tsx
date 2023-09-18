@@ -3,6 +3,7 @@ import {EventSearch} from '@/components/events/event-search';
 import { getAllEvents } from '@/helpers/api-util';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import {useRouter} from 'next/router';
+import React from 'react';
 
 const EventsPage = (props:any) => {
   const router = useRouter();

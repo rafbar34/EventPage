@@ -7,6 +7,8 @@ import {GetStaticPaths} from 'next';
 import {mockDataInterface} from '@/interface/mock-dataInterface';
 import path from 'path';
 import fs from 'fs/promises';
+import React from 'react';
+
 import {
   getAllEvents,
   getEventById,

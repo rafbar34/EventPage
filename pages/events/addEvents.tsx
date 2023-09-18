@@ -3,6 +3,7 @@ import {checkIsLogged} from '@/helpers/auth-validation';
 import {useRouter} from 'next/router';
 import {useEffect, useState} from 'react';
 import {getSession} from 'next-auth/react';
+import React from 'react';
 
 const AddEvents = () => {
   const router = useRouter();

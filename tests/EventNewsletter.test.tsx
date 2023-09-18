@@ -1,16 +1,23 @@
-
-
-import {render, screen} from '@testing-library/react'
+import {fireEvent, render, screen} from '@testing-library/react';
 import {EventNewsletter} from '../components/events/event-newsletter';
-import { Input } from '../components/UI/input';
+import {Input} from '../components/UI/input';
+import React from 'react';
 
+test('enter email into newsletter', () => {
+  const mockSetState = jest.fn();
 
+  render(
+    <Input
+      type={'text'}
+      placeholder={'newsletter'}
+      name={''}
+      setState={mockSetState}
+    />
+  );
+  const inputEmail = screen.getByPlaceholderText(
+    'newsletter'
+  ) as HTMLInputElement;
+  fireEvent.change(inputEmail, {target: {value: 'kifar121@gmail.com'}});
 
-test('enter email into newsletter', ()=>{
-    render(<Input placeholder={'newsletter'} type={''} name={''} setState={undefined} />)
-    const inputEmail = screen.getByPlaceholderText('newsletter')
-    
-    expect(inputEmail).not.toHaveLength(0)
-    expect(inputEmail).toContain('@')
-
-})
+  expect(inputEmail.value).toEqual('kifar121@gmail.com');
+});
